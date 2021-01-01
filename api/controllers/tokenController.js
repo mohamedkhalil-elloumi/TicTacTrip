@@ -1,19 +1,19 @@
 "use strict";
-const mysql = require("mysql");
 const db = require("../db");
 const config = require("../config");
 const jwt = require("jsonwebtoken");
 
 exports.tokenController = (req, res) => {
-  var request =
-    "SELECT * FROM `users` WHERE email = " + mysql.escape(req.body.email);
-  db.connection.query(request, (error, results, fields) => {
+  var request = "SELECT * FROM users WHERE email = $1";
+  db.pool.query(request, [req.body.email], (error, results) => {
     if (error) {
+      console.log(request)
+      console.log(error)
       return res
         .status(500)
         .send({ auth: false, message: "Connection failed" });
     } else {
-      if (!results.length) {
+      if (!results.rows) {
         return res.status(404).send({ auth: false, message: "No such user" });
       }
       const user = {
