@@ -12,6 +12,11 @@ var justifyTextController = require("./controllers/justifyTextController");
 var tokenController = require("./controllers/tokenController");
 const middleware = require("./middleware/global");
 
+// Home route
+app.route("/").get(() => {
+  return "<h1> Welcome to TicTacTrip Api </h1>";
+});
+
 // token route
 app.route("/api/token").post(tokenController.tokenController);
 // todoList Routes
