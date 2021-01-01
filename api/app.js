@@ -13,8 +13,8 @@ var tokenController = require("./controllers/tokenController");
 const middleware = require("./middleware/global");
 
 // Home route
-app.route("/").get(() => {
-  return "<h1> Welcome to TicTacTrip Api </h1>";
+app.route("/").get((req, res) => {
+  return res.status(200).send("<h1> Welcome to TicTacTrip Api </h1>");
 });
 
 // token route
