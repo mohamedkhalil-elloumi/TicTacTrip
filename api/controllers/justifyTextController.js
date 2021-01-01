@@ -90,7 +90,7 @@ exports.textJustification = (req, res) => {
 
   // When finishing the treatment of adding the whitespaces, we have our text justified by joining all the lines with a newline each time.
   var textJustified = lines.join("\n");
-  return res.status(200).send(textJustified);
+  return res.status(200).send("<p>" + textJustified + "</p>");
 };
 
 const addWhiteSpace = (line, index) => {

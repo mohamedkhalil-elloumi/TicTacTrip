@@ -5,10 +5,8 @@ const jwt = require("jsonwebtoken");
 
 exports.tokenController = (req, res) => {
   var request = "SELECT * FROM users WHERE email = $1";
-  db.pool.query(request, [req.body.email], (error, results) => {
+  db.client.query(request, [req.body.email], (error, results) => {
     if (error) {
-      console.log(request)
-      console.log(error)
       return res
         .status(500)
         .send({ auth: false, message: "Connection failed" });

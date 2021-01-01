@@ -1,24 +1,14 @@
-const Pool = require('pg').Pool
+const { Client } = require('pg');
 
-const pool = new Pool({
-  user: process.env["DATABASE_USER"],
-  host: 'localhost',
-  database: process.env["DATABASE_NAME"],
-  password: process.env["DATABASE_PASSWORD"],
-  port: 5432,
-})
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-// var connectionString =
-  // "pg://" +
-  //  +
-  // ":" +
-  //  +
-  // "@localhost:5432/" +
-  // ;
-// 
-// var connection = new pg.Client(connectionString);
-// connection.connect();
-// 
+client.connect();
+
 console.log("Database connected...")
 
-module.exports = { pool };
+module.exports = { client };
